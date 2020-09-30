@@ -20,5 +20,7 @@
 关于MODBUS的总结。    待办
 
 关于USB协议基础的总结   待办
-关于ST官方USB库的总结   待办
+关于ST官方USB库的总结（分多个部分）   待办
+关于BusHound使用总结 待办
+关于STM32、ARM7/9 、树莓派、手机上所用的处理器、arduino区别  https://blog.csdn.net/heda3/article/details/89037413（转载）
 
