@@ -4,23 +4,84 @@
 
 写一篇关于github和git指令的博客  待完善
 
-写一篇关于NVIC中断优先级的博客  待办
+写一篇关于NVIC中断优先级的博客  完成
 写一篇串口的总结博客  待办
 写一篇关于外部中断的博客  待办
-
-
-写一篇关于看门狗的博客 待办
-
 
 
 关于keil的数据类型 （core下面的stdint.h的55-110行）   关于原码、反码、补码       未成文
 
 
+写一篇关于看门狗的博客 待办
+
+
 关于LRC、CRC校验。
-关于MODBUS的总结。    待办
+关于MODBUS的总结。    简述RS232和RS485   待办
 
 关于USB协议基础的总结   待办
 关于ST官方USB库的总结（分多个部分）   待办
 关于BusHound使用总结 待办
 关于STM32、ARM7/9 、树莓派、手机上所用的处理器、arduino区别  https://blog.csdn.net/heda3/article/details/89037413（转载）
+
+USART
+(Transmit data register empty)
+当TDR寄存器中的数据被硬件转移到移位寄存器的时候，该位被硬件置位。如果USART_CR1
+寄存器中的TXEIE为1，则产生中断。对USART_DR的写操作，将该位清零。
+0：数据还没有被转移到移位寄存器；
+1：数据已经被转移到移位寄存器。
+注意：单缓冲器传输中使用该位。
+TC：发送完成 (Transmission complete)
+
+TC：发送完成 (Transmission complete) 
+当包含有数据的一帧发送完成后，并且TXE=1时，由硬件将该位置’1’。如果USART_CR1中的
+TCIE为’1’，则产生中断。由软件序列清除该位(先读USART_SR，然后写入USART_DR)。TC
+位也可以通过写入’0’来清除，只有在多缓存通讯中才推荐这种清除程序。
+0：发送还未完成；
+1：发送完成。
+
+RXNE：读数据寄存器非空 (Read data register not empty) 
+当RDR移位寄存器中的数据被转移到USART_DR寄存器中，该位被硬件置位。如果
+USART_CR1寄存器中的RXNEIE为1，则产生中断。对USART_DR的读操作可以将该位清
+零。RXNE位也可以通过写入0来清除，只有在多缓存通讯中才推荐这种清除程序。
+0：数据没有收到；
+1：收到数据，可以读出。
+
+
+
+
+
+
+
+
+
+
+
+
+IDLE：监测到总线空闲 (IDLE line detected)
+ORE：过载错误 (Overrun error)
+NE: 噪声错误标志 (Noise error flag)
+FE: 帧错误 (Framing error)
+PE: 校验错误 (Parity error)
+
+果USART_CR1
+因为它和RXNE一起出现，硬件会在设置RXNE标志时产生中断
+包含了发送或接收的数据。由于它是由两个寄存器组成的，一个给发送用(TDR)，一个给接收
+用(RDR)，该寄存器兼具读和写的功能。TDR寄存器提供了内部总线和输出移位寄存器之间的
+并行接口(参见图248)。RDR寄存器提供了输入移位寄存器和内部总线之间的并行接口。
+当使能校验位(USART_CR1中PCE位被置位)进行发送时，写到MSB的值(根据数据的长度不
+同，MSB是第7位或者第8位)会被后来的校验位该取代。
+当使能校验位进行接收时，读到的MSB位是接收到的校验位。
+
+BUShound can get datas my HID device sent. But an application my mate developed on windows can't read these datas. Could I think the application be not work ? 
+what I mean is  whether the reality that“BUS hound could get datas from HID device”could certify the HID device is proper functioning and the application not!
+
+lfw@ciqtek.com
+
+波特比率寄存器(USART_BRR)
+
+控制寄存器 1(USART_CR1)
+。STM32 的每个串口都有 3 个控制寄存器 USART_CR1~3，串口的很多配置
+都是通过这 3 个寄存器来设置的。
+
+
 
